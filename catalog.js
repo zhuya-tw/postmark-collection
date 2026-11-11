@@ -200,6 +200,10 @@ async function load() {
     const officeResponse = await fetch('data/offices.json', {cache: 'no-store'});
     if (!officeResponse.ok) throw Error('設置局所資料載入失敗');
     officeData = await officeResponse.json();
+    for (const placement of Object.values(officeData.commemorative)) {
+      placement.offices = placement.office_names.map(name =>
+        officeData.offices[normalize(name).replace(/\s/g, '')] || {name});
+    }
     records = data.items;
     updatedAt = data.updated_at;
     byId('lastUpdated').textContent = '最後整理：' + updatedAt;

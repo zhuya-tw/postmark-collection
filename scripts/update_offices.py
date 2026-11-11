@@ -80,18 +80,27 @@ def update():
             old = previous.get('commemorative', {}).get(item['id'], {})
             print(f"名單待核對 {item['id']}: {error}")
             if old.get('source_url') == source:
-                return item['id'], {**old, 'refresh_failed': True}
+                retained = []
+                for name in old.get('office_names', []):
+                    retained.append(dict(previous.get('offices', {}).get(normalize(name), {'name': name})))
+                return item['id'], {**old, 'offices': retained, 'refresh_failed': True}
             return item['id'], dict(status='unavailable', source_url=source, offices=[])
 
     with ThreadPoolExecutor(max_workers=5) as pool:
         placements_by_id = dict(pool.map(placements, items))
+    scenic = json.loads((ROOT / 'data' / 'scenic.json').read_text(encoding='utf-8'))['items']
+    needed = {normalize(item['office']) for item in scenic}
+    for placement in placements_by_id.values():
+        needed.update(normalize(office['name']) for office in placement['offices'])
+        placement['office_names'] = [office['name'] for office in placement.pop('offices')]
+    offices = {name: value for name, value in offices.items() if name in needed}
     data = dict(source_url=SOURCE, offices=offices, commemorative=placements_by_id)
     temp = path.with_suffix('.tmp')
-    temp.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    temp.write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
     temp.replace(path)
     for item in items:
         result = placements_by_id[item['id']]
-        print(item['id'], result['status'], len(result['offices']))
+        print(item['id'], result['status'], len(result['office_names']))
 
 
 if __name__ == '__main__':
