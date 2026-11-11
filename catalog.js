@@ -16,6 +16,21 @@ const todayTaiwan = () => {
 };
 let records = [];
 let updatedAt = '';
+let officeState = 'loading';
+let visibleCount = 24;
+let currentMatches = [];
+const more = element('button', '載入更多');
+more.type = 'button';
+more.className = 'action';
+more.hidden = true;
+byId('cards').after(more);
+more.addEventListener('click', () => {
+  const next = currentMatches.slice(visibleCount, visibleCount + 24);
+  byId('cards').append(...next.map(card));
+  visibleCount += next.length;
+  more.hidden = visibleCount >= currentMatches.length;
+});
+
 
 function element(tag, text) {
   const node = document.createElement(tag);
@@ -53,7 +68,7 @@ function officeDetails(name, office, historical = false) {
   panel.className = 'note';
   panel.append(element('strong', '設置局所地址'));
   if (!office) {
-    panel.append(element('p', '地址待核對，請查看官方資料。'));
+    panel.append(element('p', (officeState === 'loading' ? '正在載入局所地址…' : officeState === 'failed' ? '地址暫時無法載入，請重新整理或查看官方資料。' : '地址待核對，請查看官方資料。')));
     return panel;
   }
   panel.append(element('p', office.address));
@@ -84,7 +99,7 @@ function locationPanel(record) {
   const data = officeData.commemorative[record.id];
   const panel = element('div', '');
   if (data?.status !== 'verified') {
-    panel.append(element('p', '設置名單尚待核對，請參考官方設置地點。'));
+    panel.append(element('p', (officeState === 'loading' ? '正在載入設置名單…' : officeState === 'failed' ? '設置名單暫時無法載入，請重新整理或查看官方設置地點。' : '設置名單尚待核對，請參考官方設置地點。')));
     return panel;
   }
   const offices = data.offices;
@@ -159,6 +174,9 @@ function card(record) {
     image.src = record.image_url;
     image.alt = record.title + '戳圖';
     image.loading = 'lazy';
+    image.decoding = 'async';
+    image.width = 300;
+    image.height = 150;
     image.style.cssText = 'width:100%;height:150px;object-fit:contain';
     image.addEventListener('error', () => picture.replaceWith(element('p', '圖片暫時無法載入。')));
     picture.append(image);
@@ -183,7 +201,11 @@ function render() {
     (!year || record.date.startsWith(year + '-')) &&
     normalize([record.title, record.office].filter(Boolean).join(' ')).includes(query));
   byId('result').textContent = '共 ' + matches.length + ' 筆 · 同步日期 ' + updatedAt;
-  byId('cards').replaceChildren(...matches.map(card));
+  currentMatches = matches;
+  visibleCount = 24;
+  byId('cards').replaceChildren(...matches.slice(0, visibleCount).map(card));
+  more.hidden = visibleCount >= matches.length;
+  if (!matches.length) byId('cards').append(element('p', '找不到符合條件的戳圖。'));
 }
 
 async function load() {
@@ -194,35 +216,69 @@ async function load() {
     ? '依名稱、使用局所或啟用年份查詢。實際提供情形請向郵局確認。'
     : '預設顯示尚未到使用迄日的紀念戳（含迄日當天）。搜尋名稱、選年份或勾選「顯示已過使用期限的紀念戳」可查舊紀錄。補蓋期限請參考官方公告。';
   try {
-    const response = await fetch('data/' + type + '.json', {cache:'no-store'});
-    if (!response.ok) throw Error(response.status);
-    const data = await response.json();
-    const officeResponse = await fetch('data/offices.json', {cache: 'no-store'});
-    if (!officeResponse.ok) throw Error('設置局所資料載入失敗');
-    officeData = await officeResponse.json();
-    for (const placement of Object.values(officeData.commemorative)) {
-      placement.offices = placement.office_names.map(name =>
-        officeData.offices[normalize(name).replace(/\s/g, '')] || {name});
-    }
+    const data = await readData('data/' + type + '.json');
     records = data.items;
     updatedAt = data.updated_at;
     byId('lastUpdated').textContent = '最後整理：' + updatedAt;
+    byId('year').replaceChildren(element('option', '全部年份'));
+    byId('year').firstChild.value = '';
     const years = new Set(records.map(record => record.date.slice(0, 4)));
     for (const year of [...years].sort().reverse()) {
       const option = element('option', year);
       option.value = year;
       byId('year').append(option);
     }
-    byId('query').addEventListener('input', render);
-    byId('year').addEventListener('change', render);
-    byId('history').addEventListener('change', render);
+    byId('query').oninput = render;
+    byId('year').onchange = render;
+    byId('history').onchange = render;
     render();
   } catch (error) {
     byId('lastUpdated').textContent = '同步日期暫不可用';
     byId('result').textContent = '暫時無法載入' + label + '資料。';
+    more.hidden = true;
+    const retry = element('button', '重新載入清單');
+    retry.type = 'button';
+    retry.addEventListener('click', () => { retry.remove(); load(); });
+    byId('cards').replaceChildren(retry);
     console.error(error);
   }
 }
 load();
+loadOffices();
 
 
+
+
+async function readData(path) {
+  let lastError;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    try {
+      const response = await fetch(path, {signal: controller.signal});
+      if (!response.ok) throw Error(response.status);
+      return await response.json();
+    } catch (error) {
+      lastError = error;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw lastError;
+}
+
+async function loadOffices() {
+  try {
+    const data = await readData('data/offices.json');
+    for (const placement of Object.values(data.commemorative)) {
+      placement.offices = placement.office_names.map(name =>
+        data.offices[normalize(name).replace(/\s/g, '')] || {name});
+    }
+    officeData = data;
+    officeState = 'ready';
+  } catch (error) {
+    officeState = 'failed';
+    console.error(error);
+  }
+  if (records.length) render();
+}
