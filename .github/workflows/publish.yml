@@ -34,12 +34,16 @@ jobs:
         shell: bash
         run: |
           python scripts/update_stamps.py || echo '::warning::中華郵政網站無法擷取，保留現有清單資料並繼續發布。'
+      - name: 更新紀念戳及風景戳
+        run: |
+          python scripts/update_catalogs.py commemorative || echo '::warning::紀念戳更新失敗，保留前次資料。'
+          python scripts/update_catalogs.py scenic || echo '::warning::風景戳更新失敗，保留前次資料。'
       - name: 儲存最新資料及圖片
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/stamps.json images/ || true
+          git add data/ images/ || true
           if ! git diff --cached --quiet; then
             git commit -m 'chore: update postal postmark data'
             git push || echo '::warning::無法推送更新，請確認 Actions 的讀寫權限'
@@ -48,7 +52,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p site-dist
-          cp index.html .nojekyll site-dist/
+          cp index.html catalog.html catalog.js .nojekyll site-dist/
           cp -R data images site-dist/
           test -s site-dist/data/stamps.json
       - uses: actions/configure-pages@v5
