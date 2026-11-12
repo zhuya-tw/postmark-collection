@@ -40,11 +40,11 @@ button:disabled{opacity:.6;cursor:wait}
  .body{overflow-wrap:anywhere}
 }
 
-.admin-entry{max-width:1160px;margin:0 auto;padding:12px 22px 24px;text-align:right;font-size:14px}.admin-entry a{color:var(--ink2)}
+.admin-entry{position:absolute;top:14px;right:22px;z-index:2;font-size:13px}.admin-entry a{display:inline-block;padding:6px 12px;border:1px solid rgba(255,255,255,.4);border-radius:8px;color:white;text-decoration:none;background:var(--ink)}.admin-entry a:hover{background:#36566a}.headwrap{padding-top:64px}@media(max-width:620px){.admin-entry{top:12px;right:16px}.admin-entry a{padding:6px 10px}.headwrap{padding-top:66px}}
 </style>
 </head>
 <body>
-<header><div class="headwrap"><div class="postmark">集 郵</div><div class="eyebrow">POSTMARK COLLECTION · TAIWAN</div><h1>郵戳慢慢集</h1><p class="subtitle">查找臨時郵局戳、紀念戳與風景戳，收錄戳圖和中華郵政官方資料。</p><div class="headmeta"><span>資料來源：中華郵政</span><span>每天嘗試自動更新</span></div></div></header>
+<header><div class="headwrap"><div class="admin-entry"><a href="https://github.com/zhuya-tw/postmark-collection/settings" target="_blank" rel="noopener noreferrer" title="使用 GitHub 帳號登入網站管理">管理者登入 ↗</a></div><div class="postmark">集 郵</div><div class="eyebrow">POSTMARK COLLECTION · TAIWAN</div><h1>郵戳慢慢集</h1><p class="subtitle">查找臨時郵局戳、紀念戳與風景戳，收錄戳圖和中華郵政官方資料。</p><div class="headmeta"><span>資料來源：中華郵政</span><span>每天嘗試自動更新</span></div></div></header>
 <main>
 <nav class="rowfilter category-nav" aria-label="郵戳分類"><a class="action" href="./" aria-current="page">臨時郵局戳</a><a class="action" href="catalog.html?type=commemorative">紀念戳</a><a class="action" href="catalog.html?type=scenic">風景戳</a></nav>
 <h2 class="category-title">臨時郵局戳</h2>
@@ -53,7 +53,7 @@ button:disabled{opacity:.6;cursor:wait}
 <p id="public-status" role="status">正在讀取郵戳清單…</p><div id="grid" class="cards" aria-live="polite"></div><div id="empty" class="empty" hidden>找不到符合條件的郵戳。試試清除日期或地區條件。</div>
 <footer><p>這是郵友整理工具，非中華郵政官方網站。資料可能有更新延遲；以 <a href="https://www.post.gov.tw/post/internet/Philately/index.jsp?ID=507" target="_blank" rel="noopener">中華郵政臨時郵局戳圖</a> 與活動公告為準。</p><p>自動更新只在網站託管平台的排程成功執行時生效。未取得確認的郵寄地址不會自行推測為「901 支局」。</p></footer>
 </main>
-<div class="admin-entry"><a href="https://github.com/zhuya-tw/postmark-collection/settings" target="_blank" rel="noopener noreferrer" title="使用 GitHub 帳號登入網站管理">管理者登入 ↗</a></div>
+
 <dialog id="viewer" aria-label="郵戳圖片放大檢視"><div class="modal-head"><h2 id="modalTitle"></h2><button id="closeModal" type="button" aria-label="關閉">×</button></div><div class="modal-body"><img id="modalImage" alt="放大的郵戳圖案" /><div class="modal-foot"><button type="button" id="prevImg">← 上一張</button><button type="button" id="nextImg">下一張 →</button></div><p class="err" id="modalErr"></p></div></dialog>
 <script>
 (()=>{'use strict';const $=id=>document.getElementById(id);let records=[],shown=[],current=0;let loaded=false;
