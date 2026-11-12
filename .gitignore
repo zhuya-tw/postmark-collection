@@ -3,3 +3,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 site-dist/
+.private/
+.dev.vars
+.env
+.env.*

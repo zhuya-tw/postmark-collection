@@ -1,7 +1,6 @@
 """Retry independent sources, validate snapshots, and retain usable data."""
 from datetime import date, datetime, timedelta
 import json
-import os
 from pathlib import Path
 import re
 import subprocess
@@ -142,14 +141,12 @@ def main():
     retained = [name for name, result in results.items() if result['status'] == 'retained']
     health = dict(checked_at=checked_at, sources=results, issues=issues,
                   status='retained' if retained else 'attention' if issues else 'ok')
-    atomic_write('health', health)
-    if os.environ.get('GITHUB_STEP_SUMMARY'):
-        with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a', encoding='utf-8') as stream:
-            stream.write(f'## 資料檢查\n\n檢查時間 {checked_at}\n\n')
-            for name, result in results.items():
-                stream.write(f"- {name} — {result['status']}，嘗試 {result['attempts']} 次\n")
-            stream.write(f'\n待核對項目 {len(issues)} 筆\n')
-    print(json.dumps(dict(status=health['status'], issues=len(issues)), ensure_ascii=False))
+    target = ROOT / '.private' / 'health.json'
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temp = target.with_suffix('.tmp')
+    temp.write_text(json.dumps(health, ensure_ascii=False), encoding='utf-8')
+    temp.replace(target)
+    print('資料檢查完成。詳細結果請登入網站管理區。')
 
 
 if __name__ == '__main__':

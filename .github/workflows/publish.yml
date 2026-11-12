@@ -46,8 +46,9 @@ jobs:
         shell: bash
         run: |
           mkdir -p site-dist
-          cp index.html catalog.html catalog.js health.js .nojekyll site-dist/
+          cp index.html catalog.html catalog.js visits.js .nojekyll site-dist/
           cp -R data images site-dist/
+          rm -f site-dist/data/health.json
           test -s site-dist/data/stamps.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
@@ -56,6 +57,10 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
 
+      - name: 傳送私人管理報告
+        env:
+          POSTMARK_REPORT_TOKEN: ${{ secrets.POSTMARK_REPORT_TOKEN }}
+        run: python scripts/upload_report.py
       - name: 回報無法恢復的來源錯誤
         run: |
-          python -c "import json,sys; h=json.load(open('data/health.json')); sys.exit(1 if h['status']=='retained' else 0)"
+          python -c "import json,sys; h=json.load(open('.private/health.json')); sys.exit(1 if h['status']=='retained' else 0)"
