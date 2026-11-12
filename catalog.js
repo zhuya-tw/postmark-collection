@@ -19,6 +19,7 @@ let updatedAt = '';
 let officeState = 'loading';
 let visibleCount = 24;
 let currentMatches = [];
+let scenicPosition = null;
 const more = element('button', '載入更多');
 more.type = 'button';
 more.className = 'action';
@@ -50,18 +51,69 @@ function officialLink(url, text) {
 
 
 let officeData = {offices: {}, commemorative: {}};
-function nearbyOffices(offices, latitude, longitude) {
+function distanceKm(latitude, longitude, office) {
   const radians = degrees => degrees * Math.PI / 180;
-  return offices.filter(office => Number.isFinite(office.lat) && Number.isFinite(office.lon)).map(office => {
-    const halfLat = Math.sin(radians(office.lat - latitude) / 2);
-    const halfLon = Math.sin(radians(office.lon - longitude) / 2);
-    const a = halfLat ** 2 + Math.cos(radians(latitude)) *
-      Math.cos(radians(office.lat)) * halfLon ** 2;
-    const km = 12742 * Math.asin(Math.sqrt(Math.min(1, a)));
-    return {...office, km};
-  }).sort((a, b) => a.km - b.km).slice(0, 3);
+  const halfLat = Math.sin(radians(office.lat - latitude) / 2);
+  const halfLon = Math.sin(radians(office.lon - longitude) / 2);
+  const a = halfLat ** 2 + Math.cos(radians(latitude)) *
+    Math.cos(radians(office.lat)) * halfLon ** 2;
+  return 12742 * Math.asin(Math.sqrt(Math.min(1, a)));
 }
 
+function nearbyOffices(offices, latitude, longitude) {
+  return offices.filter(office => Number.isFinite(office.lat) && Number.isFinite(office.lon))
+    .map(office => ({...office, km: distanceKm(latitude, longitude, office)}))
+    .sort((a, b) => a.km - b.km).slice(0, 3);
+}
+
+function scenicOffice(record) {
+  return record.office ? officeData.offices[normalize(record.office).replace(/\s/g, '')] : undefined;
+}
+
+function sortNearPosition(matches) {
+  if (!scenic || !scenicPosition) return matches;
+  return matches.filter(record => {
+    const office = scenicOffice(record);
+    return !record.unlisted && Number.isFinite(office?.lat) && Number.isFinite(office?.lon);
+  }).sort((a, b) =>
+    distanceKm(scenicPosition.latitude, scenicPosition.longitude, scenicOffice(a)) -
+    distanceKm(scenicPosition.latitude, scenicPosition.longitude, scenicOffice(b)) ||
+    a.title.localeCompare(b.title, 'zh-Hant'));
+}
+
+function configureScenicLocation() {
+  byId('scenic-location').hidden = !scenic;
+  if (!scenic) return;
+  const button = byId('locate-scenic');
+  const message = byId('location-status');
+  message.textContent = '地址載入後可使用定位，依附近設置郵局的直線距離排序。';
+  button.onclick = () => {
+    if (!navigator.geolocation) {
+      message.textContent = '瀏覽器不支援定位，請用名稱或郵局搜尋。';
+      return;
+    }
+    button.disabled = true;
+    message.textContent = '正在取得位置，請允許瀏覽器定位…';
+    navigator.geolocation.getCurrentPosition(({coords}) => {
+      scenicPosition = {latitude: coords.latitude, longitude: coords.longitude};
+      button.disabled = false;
+      byId('clear-location').hidden = false;
+      message.textContent = '已依你的位置排序。距離為直線距離，未核對座標的據點暫不列入。';
+      render();
+    }, error => {
+      button.disabled = false;
+      message.textContent = error.code === 1
+        ? '定位權限未開啟，可在瀏覽器允許後重試，或用郵局名稱搜尋。'
+        : '暫時無法取得位置，請重試或用郵局名稱搜尋。';
+    }, {timeout: 10000, maximumAge: 60000});
+  };
+  byId('clear-location').onclick = () => {
+    scenicPosition = null;
+    byId('clear-location').hidden = true;
+    message.textContent = '已清除定位排序，可繼續使用名稱或年份查詢。';
+    render();
+  };
+}
 
 function officeDetails(name, office, historical = false) {
   const panel = element('div', '');
@@ -162,7 +214,11 @@ function card(record) {
     : '使用日期 ' + format(record.date) + ' 至 ' + format(record.end_date);
   body.append(element('h3', record.title), element('p', date));
   if (scenic) body.append(element('p', record.office),
-    officeDetails(record.office, officeData.offices[normalize(record.office).replace(/\s/g, '')], record.unlisted));
+    officeDetails(record.office, scenicOffice(record), record.unlisted));
+  if (scenic && scenicPosition) {
+    const km = distanceKm(scenicPosition.latitude, scenicPosition.longitude, scenicOffice(record));
+    body.append(element('p', '距你約 ' + km.toFixed(2) + ' 公里（直線）'));
+  }
   if (record.unlisted) body.append(element('p', '已不在最新官方清單，請向郵局確認。'));
   const source = officialLink(record.official_url, '查看官方資料 ↗');
   if (source) body.append(source);
@@ -195,12 +251,12 @@ function render() {
   const year = byId('year').value;
   const includeHistory = query || year || byId('history').checked;
   const today = todayTaiwan();
-  const matches = records.filter(record =>
+  const matches = sortNearPosition(records.filter(record =>
     (scenic || includeHistory || record.end_date >= today) &&
     (query || year || !record.unlisted) &&
     (!year || record.date.startsWith(year + '-')) &&
-    normalize([record.title, record.office].filter(Boolean).join(' ')).includes(query));
-  byId('result').textContent = '共 ' + matches.length + ' 筆 · 同步日期 ' + updatedAt;
+    normalize([record.title, record.office, scenicOffice(record)?.address].filter(Boolean).join(' ')).includes(query)));
+  byId('result').textContent = '共 ' + matches.length + ' 筆' + (scenicPosition ? ' · 距離由近到遠' : '') + ' · 同步日期 ' + updatedAt;
   currentMatches = matches;
   visibleCount = 24;
   byId('cards').replaceChildren(...matches.slice(0, visibleCount).map(card));
@@ -243,6 +299,7 @@ async function load() {
     console.error(error);
   }
 }
+configureScenicLocation();
 load();
 loadOffices();
 
@@ -276,9 +333,16 @@ async function loadOffices() {
     }
     officeData = data;
     officeState = 'ready';
+    if (scenic) {
+      byId('locate-scenic').disabled = false;
+      byId('location-status').textContent = '按「依我的位置找風景戳」，查看附近設置郵局的戳圖。';
+    }
   } catch (error) {
     officeState = 'failed';
+    if (scenic) byId('location-status').textContent = '地址資料暫時無法載入，請重新整理後再試定位。';
     console.error(error);
   }
   if (records.length) render();
 }
+
+

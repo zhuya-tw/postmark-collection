@@ -9,6 +9,32 @@
 .category-nav{margin:0 0 18px}
 .category-title{font-size:clamp(23px,3vw,32px);margin:0 0 8px}
 button,input,select{font-family:inherit}
+
+.filters input[type="search"],.filters input[type="date"],.filters select{min-width:0;max-width:100%;box-sizing:border-box;font-size:16px;min-height:44px}
+.catalog-fields{display:grid;grid-template-columns:minmax(0,2fr) minmax(140px,1fr);gap:16px;align-items:end}
+.catalog-field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.catalog-field input,.catalog-field select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink)}
+.catalog-options{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px}
+.location-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.location-actions button{min-height:44px}
+.location-status{margin:10px 0 0;font-size:14px;overflow-wrap:anywhere}
+button:disabled{opacity:.6;cursor:wait}
+@media(max-width:620px){
+ main{padding:20px 16px 48px}
+ .headwrap{padding:32px 16px}
+ .catalog-fields{grid-template-columns:minmax(0,1fr);gap:14px}
+ .catalog-options{align-items:flex-start}
+ .catalog-options>label{display:flex;gap:8px;align-items:flex-start}
+ .location-actions{width:100%}
+ .location-actions button{flex:1 1 140px}
+ .category-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .category-nav .action{text-align:center;padding:10px 4px;margin:0}
+ .rowfilter{gap:12px}
+ .rowfilter .tick{max-width:100%;flex-wrap:wrap}
+ .filters .field{min-width:0}
+ .body{overflow-wrap:anywhere}
+}
+
 </style>
 <body>
 <header><div class="headwrap"><div class="postmark">集 郵</div><div class="eyebrow">POSTMARK COLLECTION · TAIWAN</div><h1>郵戳慢慢集</h1><p class="subtitle">查找臨時郵局戳、紀念戳與風景戳，收錄戳圖和中華郵政官方資料。</p><div class="headmeta"><span>資料來源：中華郵政</span><span>每天嘗試自動更新</span><span id="lastUpdated">載入資料中…</span></div></div></header>
@@ -17,15 +43,22 @@ button,input,select{font-family:inherit}
 <h2 id="title" class="category-title">戳圖圖鑑</h2>
 <p id="intro"></p>
 <section class="filters" aria-label="查詢條件">
-<label for="query">搜尋名稱或使用局所</label>
-<input id="query" type="search">
-<label for="year">年份</label>
-<select id="year"><option value="">全部年份</option></select>
+<div class="catalog-fields">
+<div class="catalog-field"><label for="query">搜尋名稱或使用局所</label><input id="query" type="search" placeholder="輸入戳名、郵局或地區"></div>
+<div class="catalog-field"><label for="year">年份</label><select id="year"><option value="">全部年份</option></select></div>
+</div>
+<div class="catalog-options">
 <label id="history-filter" hidden><input id="history" type="checkbox"> 顯示已過使用期限的紀念戳</label>
+<div id="scenic-location" hidden>
+<div class="location-actions"><button type="button" class="action" id="locate-scenic" disabled>依我的位置找風景戳</button><button type="button" class="action" id="clear-location" hidden>清除定位排序</button></div>
+<p id="location-status" class="location-status" role="status"></p>
+</div>
+</div>
 </section>
 <p id="result" role="status">正在讀取戳圖資料…</p>
 <div class="cards" id="cards"></div>
 </main>
-<script src="catalog.js" defer></script>
+<script src="catalog.js?v=20261112-nearby" defer></script>
 </body>
 </html>
+
