@@ -112,5 +112,21 @@
     "address_source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=007100-1",
     "address_checked_at": "2026-11-06",
     "address_note": "活動公告指定屏東民生路郵局集郵檯；地址已與官方營業據點核對。"
+  },
+  "post-13357": {
+    "recipient": "桃園郵局集郵服務中心",
+    "address": "330005 桃園市桃園區成功路一段51號",
+    "address_status": "已核對官方收件單位及地址",
+    "address_source_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13357&ID=507",
+    "address_checked_at": "2026-11-12",
+    "address_note": "本場設於楊梅郵局；公告指定郵件寄至桃園郵局集郵服務中心。"
+  },
+  "post-13356": {
+    "recipient": "阿里山郵局",
+    "address": "605001 嘉義縣阿里山鄉中正村2鄰東阿里山53號",
+    "address_status": "已核對官方收件單位及地址",
+    "address_source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=005128-6",
+    "address_checked_at": "2026-11-12",
+    "address_note": "本場公告指定郵件寄阿里山郵局；地址與中華郵政現行營業據點資料核對。"
   }
 }

@@ -98,6 +98,12 @@ def recipient_from_notes(notes):
         address=match.group(1).strip(' ,.，。；;()')
         suffix=suffix[:match.start()].strip(' ,.，。；;()')
     if re.search(r'\d+號',suffix) and not address:
+        combined = re.fullmatch(
+            r'(?P<address>.+?\d+(?:之\d+)?號(?:\s*\d+(?:之\d+)?樓)?)\s*'
+            r'(?P<recipient>[^\d\s].*(?:郵局|中心|科|課|檯|處))',
+            suffix)
+        if combined:
+            return combined['recipient'], combined['address'], '官網明列'
         address=suffix
         return '',address,'僅列收件地址，局名待確認'
     return suffix,address,'官網明列' if address else '僅列收件單位，地址待確認'
