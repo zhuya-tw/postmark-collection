@@ -1,10 +1,10 @@
-name: 每日更新臨時郵局並發布網站
+name: 定期同步郵戳並檢查資料
 on:
   push:
     branches: [main, master]
   schedule:
-    # UTC 00:17 = 台灣時間每日 08:17。GitHub 排程可能延遲。
-    - cron: '17 0 * * *'
+    # 台灣時間 08:17、12:17、16:17、20:17；GitHub 排程可能延遲。
+    - cron: '17 0,4,8,12 * * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -16,7 +16,7 @@ concurrency:
 jobs:
   update-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -30,16 +30,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: 驗證解析器
         run: python -m unittest discover -s tests -v
-      - name: 擷取官方資料及快取郵戳圖片（失敗保留前次資料）
-        shell: bash
-        run: |
-          python scripts/update_stamps.py || echo '::warning::中華郵政網站無法擷取，保留現有清單資料並繼續發布。'
-      - name: 更新紀念戳及風景戳
-        run: |
-          python scripts/update_catalogs.py commemorative || echo '::warning::紀念戳更新失敗，保留前次資料。'
-          python scripts/update_catalogs.py scenic || echo '::warning::風景戳更新失敗，保留前次資料。'
-      - name: 更新完整局所地址與紀念戳設置名單
-        run: python scripts/update_offices.py || echo '::warning::局所資料更新失敗，保留前次核對資料。'
+      - name: 同步來源、自動重試與資料檢查
+        run: python scripts/update_site.py
       - name: 儲存最新資料及圖片
         shell: bash
         run: |
@@ -48,13 +40,13 @@ jobs:
           git add data/ images/ || true
           if ! git diff --cached --quiet; then
             git commit -m 'chore: update postal postmark data'
-            git push || echo '::warning::無法推送更新，請確認 Actions 的讀寫權限'
+            git push
           fi
       - name: 建立網站發布資料夾（不公開程式與工作流程設定）
         shell: bash
         run: |
           mkdir -p site-dist
-          cp index.html catalog.html catalog.js .nojekyll site-dist/
+          cp index.html catalog.html catalog.js health.js .nojekyll site-dist/
           cp -R data images site-dist/
           test -s site-dist/data/stamps.json
       - uses: actions/configure-pages@v5
@@ -63,3 +55,7 @@ jobs:
           path: './site-dist'
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: 回報無法恢復的來源錯誤
+        run: |
+          python -c "import json,sys; h=json.load(open('data/health.json')); sys.exit(1 if h['status']=='retained' else 0)"
