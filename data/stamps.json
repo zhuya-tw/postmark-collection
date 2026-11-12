@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-11T10:57:35+08:00",
-  "update_status": "排程同步成功：本次取得 17 場，累計收錄 21 場（含歷史紀錄）",
+  "updated_at": "2026-11-12T09:35:34+08:00",
+  "update_status": "排程同步成功：本次取得 19 場，累計收錄 23 場（含歷史紀錄）",
   "source_url": "https://www.post.gov.tw/post/internet/Philately/index.jsp?ID=507",
   "items": [
     {
@@ -241,6 +241,19 @@
       "source_description": "中華郵政臨時郵局戳圖公告"
     },
     {
+      "id": "post-13357",
+      "date": "2026-12-01",
+      "region": "桃園",
+      "title": "新年郵票(115年版)發行首日",
+      "recipient": "",
+      "address": "330005桃園市桃園區成功路一段51號桃園郵局集郵服務中心",
+      "address_status": "僅列收件地址，局名待確認",
+      "image_url": "images/cache/cd9011949fe11425147b.jpg",
+      "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13357&ID=507",
+      "venue_note": "楊梅郵局(地址:楊梅區大平街7號)(郵件請寄:330005桃園市桃園區成功路一段51號桃園郵局集郵服務中心)(主辦局:桃園郵局)(局贈封:無)(9時至12時)",
+      "source_description": "中華郵政臨時郵局戳圖公告"
+    },
+    {
       "id": "2026-12-05-18",
       "date": "2026-12-05",
       "region": "三重",
@@ -268,6 +281,19 @@
       "address_source_url": "https://subservices.post.gov.tw/post/internet/Philately/index.jsp?ID=510",
       "address_checked_at": "2026-11-06",
       "address_note": "活動公告指定新興郵局集郵服務中心；地址已與官方集郵服務中心名錄核對。"
+    },
+    {
+      "id": "post-13356",
+      "date": "2027-01-01",
+      "region": "嘉義",
+      "title": "2027阿里山日出印象音樂會",
+      "recipient": "阿里山郵局",
+      "address": "",
+      "address_status": "僅列收件單位，地址待確認",
+      "image_url": "images/cache/9565f7f5fbcef93a063c.jpg",
+      "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13356&ID=507",
+      "venue_note": "阿里山國家森林遊樂區祝山觀日平台(停機坪)（郵件請寄:阿里山郵局）(主辦局:嘉義郵局)(局贈封:新年郵票(115年版)首日封500個)(5時至8時)",
+      "source_description": "中華郵政臨時郵局戳圖公告"
     },
     {
       "id": "post-13342",
