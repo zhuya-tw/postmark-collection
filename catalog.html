@@ -35,9 +35,10 @@ button:disabled{opacity:.6;cursor:wait}
  .body{overflow-wrap:anywhere}
 }
 
+.admin-entry{max-width:1160px;margin:0 auto;padding:12px 22px 24px;text-align:right;font-size:14px}.admin-entry a{color:var(--ink2)}
 </style>
 <body>
-<header><div class="headwrap"><div class="postmark">集 郵</div><div class="eyebrow">POSTMARK COLLECTION · TAIWAN</div><h1>郵戳慢慢集</h1><p class="subtitle">查找臨時郵局戳、紀念戳與風景戳，收錄戳圖和中華郵政官方資料。</p><div class="headmeta"><span>資料來源：中華郵政</span><span>每天嘗試自動更新</span><span id="lastUpdated">載入資料中…</span></div></div></header>
+<header><div class="headwrap"><div class="postmark">集 郵</div><div class="eyebrow">POSTMARK COLLECTION · TAIWAN</div><h1>郵戳慢慢集</h1><p class="subtitle">查找臨時郵局戳、紀念戳與風景戳，收錄戳圖和中華郵政官方資料。</p><div class="headmeta"><span>資料來源：中華郵政</span><span>每天嘗試自動更新</span></div></div></header>
 <main>
 <nav class="rowfilter category-nav" aria-label="郵戳分類"><a class="action" href="index.html">臨時郵局戳</a><a class="action" href="catalog.html?type=commemorative">紀念戳</a><a class="action" href="catalog.html?type=scenic">風景戳</a></nav>
 <h2 id="title" class="category-title">戳圖圖鑑</h2>
@@ -58,7 +59,8 @@ button:disabled{opacity:.6;cursor:wait}
 <p id="result" role="status">正在讀取戳圖資料…</p>
 <div class="cards" id="cards"></div>
 </main>
-<script src="catalog.js?v=20261112-nearby" defer></script>
+<div class="admin-entry"><a href="https://github.com/zhuya-tw/postmark-collection/settings" target="_blank" rel="noopener noreferrer" title="使用 GitHub 帳號登入網站管理">管理者登入 ↗</a></div>
+<script src="catalog.js?v=20261112-public-clean" defer></script>
 </body>
 </html>
 

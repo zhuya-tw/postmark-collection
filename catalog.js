@@ -256,7 +256,7 @@ function render() {
     (query || year || !record.unlisted) &&
     (!year || record.date.startsWith(year + '-')) &&
     normalize([record.title, record.office, scenicOffice(record)?.address].filter(Boolean).join(' ')).includes(query)));
-  byId('result').textContent = '共 ' + matches.length + ' 筆' + (scenicPosition ? ' · 距離由近到遠' : '') + ' · 同步日期 ' + updatedAt;
+  byId('result').hidden = true;
   currentMatches = matches;
   visibleCount = 24;
   byId('cards').replaceChildren(...matches.slice(0, visibleCount).map(card));
@@ -275,7 +275,6 @@ async function load() {
     const data = await readData('data/' + type + '.json');
     records = data.items;
     updatedAt = data.updated_at;
-    byId('lastUpdated').textContent = '最後整理：' + updatedAt;
     byId('year').replaceChildren(element('option', '全部年份'));
     byId('year').firstChild.value = '';
     const years = new Set(records.map(record => record.date.slice(0, 4)));
@@ -289,7 +288,7 @@ async function load() {
     byId('history').onchange = render;
     render();
   } catch (error) {
-    byId('lastUpdated').textContent = '同步日期暫不可用';
+    byId('result').hidden = false;
     byId('result').textContent = '暫時無法載入' + label + '資料。';
     more.hidden = true;
     const retry = element('button', '重新載入清單');
