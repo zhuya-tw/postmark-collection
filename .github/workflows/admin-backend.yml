@@ -1,0 +1,28 @@
+name: Deploy private admin backend
+on:
+  push:
+    branches: [main, feature/private-admin-analytics]
+    paths: ['admin-backend/**', '.github/workflows/admin-backend.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: postmark-admin-deploy
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test admin-backend/worker.test.mjs
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_POSTMARK_DEPLOY_TOKEN }}
+          accountId: '692f75eb34b435f5c5c649e5be877e6d'
+          workingDirectory: admin-backend
+          wranglerVersion: '4'
+          command: deploy --keep-vars

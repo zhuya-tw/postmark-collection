@@ -2,6 +2,10 @@ name = "postmark-admin"
 main = "worker.mjs"
 compatibility_date = "2026-11-12"
 workers_dev = true
+keep_vars = true
+
+[vars]
+GITHUB_CLIENT_ID = "Ov23liR1bOZvJK4wbCCq"
 
 [[d1_databases]]
 binding = "DB"
