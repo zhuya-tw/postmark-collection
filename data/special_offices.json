@@ -1,0 +1,41 @@
+{
+  "郵政博物館": {
+    "name": "郵政博物館",
+    "address": "100056 臺北市中正區重慶南路2段45號",
+    "phone": "02-23945185 分機811",
+    "source_url": "https://www.post.gov.tw/post/internet/I_location/museum_info.jsp",
+    "verification_terms": [
+      "重慶南路",
+      "45號"
+    ],
+    "checked_at": "2026-11-16",
+    "service_note": "博物館內設置。郵寄索戳方式與受理情形請先洽館方。"
+  },
+  "臺灣桃園國際機場郵局第一航廈郵務延伸工作站": {
+    "name": "臺灣桃園國際機場郵局第一航廈郵務延伸工作站",
+    "address": "337041 桃園市大園區航站南路15號（第一航廈出境大廳）",
+    "phone": "",
+    "source_url": "https://admin.taiwan.net.tw/zh-TW/Organize/Articles?a=194",
+    "verification_terms": [
+      "第一航廈",
+      "航站南路15號"
+    ],
+    "placement_source_url": "https://www.post.gov.tw/post/FileCenter/post_ww2/Bulletin_File/files/1400578703219/9BFB486E-6D53-4184-9A81-B47677A4A9AE.pdf",
+    "checked_at": "2026-11-16",
+    "service_note": "第一航廈延伸工作站，與第二航廈的機場郵局地址不同。此為設置位置；郵寄索戳請先向臺灣桃園國際機場郵局確認收件方式。"
+  },
+  "故宮南部院區郵務櫃檯": {
+    "name": "故宮南部院區郵務櫃檯",
+    "address": "612008 嘉義縣太保市故宮大道888號（博物館1樓郵局）",
+    "phone": "",
+    "source_url": "https://south.npm.gov.tw/Visit/ParkIntroduction/Gifts.htm",
+    "verification_terms": [
+      "郵局",
+      "故宮大道888號"
+    ],
+    "placement_source_url": "https://www.post.gov.tw/post/FileCenter/post_ww2/stampmark/picture/place0911.pdf",
+    "checked_at": "2026-11-16",
+    "service_note": "嘉義文化路郵局故宮南院延伸櫃臺。郵寄索戳請先向郵局確認收件方式。"
+  }
+}
+

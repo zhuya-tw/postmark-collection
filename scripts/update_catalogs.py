@@ -65,6 +65,25 @@ def fetch_catalog(kind, first_import):
     return items
 
 
+def scenic_relocation(html):
+    """Only use an explicit, effective official instruction to move a stamp."""
+    soup = BeautifulSoup(html, 'html.parser')
+    for row in soup.select('tr'):
+        cells = row.find_all(['td', 'th'], recursive=False)
+        if len(cells) != 2 or re.sub(r'\s+', '', cells[0].get_text()) != '附註':
+            continue
+        note = cells[1].get_text(' ', strip=True)
+        matches = re.findall(r'(\d{2,4})年(\d{1,2})月(\d{1,2})日起[^。]*?請至([^。]+?郵局)', note)
+        effective = []
+        for year, month, day, office in matches:
+            start = roc_date(f'{year}/{month}/{day}')
+            if start and start <= TODAY:
+                effective.append((start, office.strip()))
+        if effective:
+            return dict(office=max(effective)[1], office_note=note)
+    return None
+
+
 def update(name, kind):
     path = ROOT / 'data' / f'{name}.json'
     saved = json.loads(path.read_text(encoding='utf-8'))['items'] if path.exists() else []
@@ -73,6 +92,17 @@ def update(name, kind):
 
     def add_image(item):
         old = previous.get(item['id'], {})
+        if kind == '508' and re.fullmatch(r'\d{6}-\d', item.get('office', '')):
+            try:
+                change = scenic_relocation(get(item['official_url'], timeout=12))
+                if change:
+                    item['listed_office'] = item['office']
+                    item.update(change)
+                    item['office_source_url'] = item['official_url']
+            except Exception:
+                if old.get('listed_office') == item.get('office') and old.get('office_source_url'):
+                    item.update({key: old[key] for key in ('office', 'listed_office', 'office_note', 'office_source_url') if key in old})
+                    item['office_refresh_failed'] = True
         if old.get('image_url'):
             item['image_url'] = old['image_url']
             return

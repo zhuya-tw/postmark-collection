@@ -124,6 +124,7 @@ function officeDetails(name, office, historical = false) {
     return panel;
   }
   panel.append(element('p', office.address));
+  if (office.service_note) panel.append(element('p', office.service_note));
   if (office.phone) {
     const phone = element('a', '郵務電話 ' + office.phone);
     phone.href = 'tel:' + office.phone.replace(/[^+\d]/g, '');
@@ -215,6 +216,7 @@ function card(record) {
   body.append(element('h3', record.title), element('p', date));
   if (scenic) body.append(element('p', record.office),
     officeDetails(record.office, scenicOffice(record), record.unlisted));
+  if (scenic && record.office_note) body.append(element('p', record.office_note));
   if (scenic && scenicPosition) {
     const km = distanceKm(scenicPosition.latitude, scenicPosition.longitude, scenicOffice(record));
     body.append(element('p', '距你約 ' + km.toFixed(2) + ' 公里（直線）'));
@@ -343,5 +345,6 @@ async function loadOffices() {
   }
   if (records.length) render();
 }
+
 
 

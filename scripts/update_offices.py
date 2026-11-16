@@ -9,6 +9,7 @@ from pathlib import Path
 
 import requests
 from pypdf import PdfReader
+from special_locations import refresh_special_offices
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = 'https://www.post.gov.tw/post/internet/Templates/getOpenDataFile.jsp?vkey=B484EB27-B3F0-4D02-8F62-047D20C64078'
@@ -63,6 +64,7 @@ def update():
             offices[norm] = record
     path = ROOT / 'data' / 'offices.json'
     previous = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+    offices.update(refresh_special_offices(previous.get('offices', {})))
     items = json.loads((ROOT / 'data' / 'commemorative.json').read_text(encoding='utf-8'))['items']
 
     def placements(item):

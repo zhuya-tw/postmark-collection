@@ -94,6 +94,8 @@ def audit():
                 add(source, item, 'missing-image')
             if source == 'scenic' and normalize(item['office']) not in office_data['offices']:
                 add(source, item, 'missing-office-address')
+            if source == 'scenic' and (item.get('office_refresh_failed') or office_data['offices'].get(normalize(item['office']), {}).get('refresh_failed')):
+                add(source, item, 'office-source-recheck')
             if source == 'commemorative':
                 placement = office_data['commemorative'].get(item['id'], {})
                 if placement.get('status') != 'verified' or placement.get('refresh_failed'):
