@@ -35,6 +35,9 @@ def parse_agencies(html, source_url):
         if not street.startswith(prefix):
             street = prefix + street
         record = dict(name=name, address=code + ' ' + street, phone=phone, source_url=source_url)
+        extension = re.fullmatch(r'(\(0\d{1,2}\)\d{3,4}-\d{4})-(\d+)', phone)
+        if extension:
+            record.update(phone=extension[1], phone_extension=extension[2])
         if note:
             record['service_note'] = note.rstrip(')')
         if name.startswith('高雄'):

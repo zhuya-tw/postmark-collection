@@ -2,7 +2,8 @@
   "郵政博物館": {
     "name": "郵政博物館",
     "address": "100056 臺北市中正區重慶南路2段45號",
-    "phone": "02-23945185 分機811",
+    "phone": "02-23945185",
+    "phone_extension": "811",
     "source_url": "https://www.post.gov.tw/post/internet/I_location/museum_info.jsp",
     "verification_terms": [
       "重慶南路",

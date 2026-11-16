@@ -126,8 +126,9 @@ function officeDetails(name, office, historical = false) {
   panel.append(element('p', office.address));
   if (office.service_note) panel.append(element('p', office.service_note));
   if (office.phone) {
-    const phone = element('a', '郵務電話 ' + office.phone);
-    phone.href = 'tel:' + office.phone.replace(/[^+\d]/g, '');
+    const extension = office.phone_extension ? ' 分機' + office.phone_extension : '';
+    const phone = element('a', '郵務電話 ' + office.phone + extension);
+    phone.href = 'tel:' + office.phone.replace(/[^+\d]/g, '') + (office.phone_extension ? ';ext=' + office.phone_extension : '');
     panel.append(phone);
   }
   panel.append(element('p', historical ? '歷史設置資料。郵寄受理與收件資訊請先向郵局確認。'
