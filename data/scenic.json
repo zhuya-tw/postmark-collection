@@ -1614,7 +1614,10 @@
       "title": "臺中公園",
       "date": "2016-12-20",
       "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=11169&ID=508",
-      "office": "002118-2",
+      "office": "臺中民權路郵局",
+      "listed_office": "002118-2",
+      "office_note": "115年4月20日起，民眾欲蓋用「臺中公園」風景郵戳請至臺中民權路郵局。",
+      "office_source_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=11169&ID=508",
       "image_url": "https://www.post.gov.tw/post/FileCenter/post_ww2/stampmark/picture/臺中公園.png"
     },
     {
@@ -1782,7 +1785,10 @@
       "title": "高美濕地",
       "date": "2015-11-11",
       "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=10743&ID=508",
-      "office": "014149-0",
+      "office": "臺中港郵局",
+      "listed_office": "014149-0",
+      "office_note": "115年5月18日起，民眾欲蓋用「高美濕地」風景郵戳請至臺中港郵局。",
+      "office_source_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=10743&ID=508",
       "image_url": "https://www.post.gov.tw/post/FileCenter/post_ww2/stampmark/picture/高美濕地.png"
     },
     {
