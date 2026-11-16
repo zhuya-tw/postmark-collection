@@ -15,7 +15,7 @@
 .category-title{font-size:clamp(23px,3vw,32px);margin:0 0 8px}
 button,input,select{font-family:inherit}
 
-.filters input[type="search"],.filters input[type="date"],.filters select{min-width:0;max-width:100%;box-sizing:border-box;font-size:16px;min-height:44px}
+.filters input[type="search"],.filters input[type="date"],.filters select,.list-tools select{min-width:0;max-width:100%;box-sizing:border-box;font-size:16px;min-height:44px}
 .filters select{padding:8px 12px;border:1px solid #d9d7cf;border-radius:12px;background:#fff;color:var(--ink)}
 .catalog-fields{display:grid;grid-template-columns:minmax(0,2fr) minmax(140px,1fr);gap:16px;align-items:end}
 .catalog-field{display:flex;flex-direction:column;gap:6px;min-width:0}
@@ -42,7 +42,7 @@ button:disabled{opacity:.6;cursor:wait}
 }
 
 .admin-entry{display:flex;justify-content:flex-end;margin-top:20px;font-size:13px}.admin-entry a{display:inline-block;padding:7px 12px;border:1px solid rgba(255,255,255,.4);border-radius:8px;color:white;text-decoration:none}.admin-entry a:hover{background:#36566a}.headwrap{padding-top:54px;padding-bottom:20px}@media(max-width:620px){.headwrap{padding-top:32px;padding-bottom:18px}.admin-entry{margin-top:18px}.admin-entry a{padding:7px 10px}}
-#grid{margin-top:16px}
+.list-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px}.list-tools p{margin:0}.list-tools .tick{margin-left:auto;flex-shrink:0}.list-tools select{font:inherit;min-height:44px;max-width:100%}#grid{margin-top:12px}
 </style>
 </head>
 <body>
@@ -51,8 +51,8 @@ button:disabled{opacity:.6;cursor:wait}
 <nav class="rowfilter category-nav" aria-label="郵戳分類"><a class="action" href="./" aria-current="page">臨時郵局戳</a><a class="action" href="catalog.html?type=commemorative">紀念戳</a><a class="action" href="catalog.html?type=scenic">風景戳</a></nav>
 <h2 class="category-title">臨時郵局戳</h2>
 <div class="info"><b>索戳注意：</b>「尚未舉辦／預估補蓋期內」是依活動日與 10 個日曆天推算，實際補蓋種類、截止日與受理方式以郵局公告為準。<b>郵寄必須預留送達時間</b>，不要等最後一天才寄出。收件單位與地址如標示「待確認」，寄前請向當地郵局核實。</div>
-<section class="filters" aria-label="查詢條件"><h2>尋找想收藏的郵戳</h2><p>預設隱藏已逾預估補蓋期限的郵戳。可用關鍵字、地區、日期或年份查找舊紀錄，也可勾選「只看過往場次」。</p><div class="fields"><div class="field"><label for="kw">關鍵字／活動名稱／收件單位</label><input id="kw" type="search" placeholder="例如：寶可夢、臺中、世界郵展、集郵中心" /></div><div class="field"><label for="region">局名／地區</label><select id="region"><option value="">全部地區</option></select></div><div class="field"><label for="from">活動開始日期</label><input id="from" type="date" /></div><div class="field"><label for="to">活動結束日期</label><input id="to" type="date" /></div></div><div class="rowfilter"><label class="tick">圖鑑年份 <select id="year"><option value="">全部年份</option></select></label><label class="tick"><input type="checkbox" id="history" />只看過往場次</label><label class="tick"><input type="checkbox" id="active" />只看尚可索戳（含未來場次）</label><label class="tick"><input type="checkbox" id="pending" />只看收件資訊待確認</label><label class="tick"><input type="checkbox" id="pics" />只看有圖片資料</label><button class="plainbtn" id="reset" type="button">清除條件</button><div style="flex:1"></div><label class="tick" for="sort">排序 <select id="sort"><option value="asc">日期由近到遠</option><option value="desc">日期由遠到近</option></select></label></div></section>
-<p id="public-status" role="status">正在讀取郵戳清單…</p><div id="grid" class="cards" aria-live="polite"></div><div id="empty" class="empty" hidden>找不到符合條件的郵戳。試試清除日期或地區條件。</div>
+<section class="filters" aria-label="查詢條件"><h2>尋找想收藏的郵戳</h2><p>預設隱藏已逾預估補蓋期限的郵戳。可用關鍵字、地區、日期或年份查找舊紀錄，也可勾選「只看過往場次」。</p><div class="fields"><div class="field"><label for="kw">關鍵字／活動名稱／收件單位</label><input id="kw" type="search" placeholder="例如：寶可夢、臺中、世界郵展、集郵中心" /></div><div class="field"><label for="region">局名／地區</label><select id="region"><option value="">全部地區</option></select></div><div class="field"><label for="from">活動開始日期</label><input id="from" type="date" /></div><div class="field"><label for="to">活動結束日期</label><input id="to" type="date" /></div></div><div class="rowfilter"><label class="tick">圖鑑年份 <select id="year"><option value="">全部年份</option></select></label><label class="tick"><input type="checkbox" id="history" />只看過往場次</label><label class="tick"><input type="checkbox" id="active" />只看尚可索戳（含未來場次）</label><label class="tick"><input type="checkbox" id="pending" />只看收件資訊待確認</label><label class="tick"><input type="checkbox" id="pics" />只看有圖片資料</label><button class="plainbtn" id="reset" type="button">清除條件</button></div></section>
+<div class="list-tools"><p id="public-status" role="status">正在讀取郵戳清單…</p><label class="tick" for="sort">排序 <select id="sort"><option value="asc">日期由近到遠</option><option value="desc">日期由遠到近</option></select></label></div><div id="grid" class="cards" aria-live="polite"></div><div id="empty" class="empty" hidden>找不到符合條件的郵戳。試試清除日期或地區條件。</div>
 <footer><p>這是郵友整理工具，非中華郵政官方網站。資料可能有更新延遲；以 <a href="https://www.post.gov.tw/post/internet/Philately/index.jsp?ID=507" target="_blank" rel="noopener">中華郵政臨時郵局戳圖</a> 與活動公告為準。</p><p>自動更新只在網站託管平台的排程成功執行時生效。未取得確認的郵寄地址不會自行推測為「901 支局」。</p></footer>
 </main>
 
