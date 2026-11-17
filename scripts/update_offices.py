@@ -10,6 +10,7 @@ from pathlib import Path
 import requests
 from pypdf import PdfReader
 from special_locations import refresh_special_offices
+from activity_locations import write_activity_locations
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = 'https://www.post.gov.tw/post/internet/Templates/getOpenDataFile.jsp?vkey=B484EB27-B3F0-4D02-8F62-047D20C64078'
@@ -95,6 +96,7 @@ def update():
     for placement in placements_by_id.values():
         needed.update(normalize(office['name']) for office in placement['offices'])
         placement['office_names'] = [office['name'] for office in placement.pop('offices')]
+    write_activity_locations(offices)
     offices = {name: value for name, value in offices.items() if name in needed}
     data = dict(source_url=SOURCE, offices=offices, commemorative=placements_by_id)
     temp = path.with_suffix('.tmp')

@@ -1,0 +1,176 @@
+{
+  "updated_at": "2026-11-17",
+  "locations": {
+    "post-13343": {
+      "name": "大雪山遊客中心",
+      "lat": 24.2552643,
+      "lon": 121.0082225,
+      "county": "臺中市",
+      "source_url": "https://www.openstreetmap.org/way/259739924",
+      "precision": "遊客中心參考點",
+      "venue": "大雪山遊客中心(和平區雪山路18號)"
+    },
+    "post-13328": {
+      "name": "臺東大同路郵局",
+      "lat": 22.752944,
+      "lon": 121.153945,
+      "county": "臺東縣",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/index.jsp?ID=1901",
+      "precision": "郵局參考點",
+      "venue": "臺東大同路郵局營業廳(臺東市大同路126號)"
+    },
+    "post-13348": {
+      "name": "臺中民權路郵局",
+      "lat": 24.139121,
+      "lon": 120.678871,
+      "county": "臺中市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/index.jsp?ID=1901",
+      "precision": "郵局參考點",
+      "venue": "臺中民權路郵局儲匯營業廳（中區民權路86號2樓）"
+    },
+    "post-13347": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館臨時郵局C區（本場臨局不受理報值郵件）"
+    },
+    "post-13333": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館臨時郵局A區(本場臨局不受理報值郵件)"
+    },
+    "post-13336": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館(本場臨局不受理報值郵件)"
+    },
+    "post-13332": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館臨時郵局B區(本場臨局不受理報值郵件)"
+    },
+    "post-13349": {
+      "name": "新興郵局",
+      "lat": 22.631026,
+      "lon": 120.303875,
+      "county": "高雄市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/index.jsp?ID=1901",
+      "precision": "郵局參考點",
+      "venue": "新興郵局集郵服務中心"
+    },
+    "post-13354": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館臨時郵局A區（本場臨局不受理報值郵件）"
+    },
+    "post-13337": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館(本場臨局不受理報值郵件)"
+    },
+    "post-13338": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館(本場臨局不受理報值郵件)"
+    },
+    "post-13339": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館(本場臨局不受理報值郵件)"
+    },
+    "post-13340": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館(本場臨局不受理報值郵件)"
+    },
+    "post-13341": {
+      "name": "臺北世界貿易中心展覽一館",
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
+      "venue": "台北世界貿易中心展覽一館(本場臨局不受理報值郵件)"
+    },
+    "post-13357": {
+      "name": "楊梅郵局",
+      "lat": 24.910675,
+      "lon": 121.147608,
+      "county": "桃園市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/index.jsp?ID=1901",
+      "precision": "郵局參考點",
+      "venue": "楊梅郵局(地址:楊梅區大平街7號)"
+    },
+    "2026-12-05-18": {
+      "name": "五華國小",
+      "lat": 25.08752,
+      "lon": 121.4924152,
+      "county": "新北市",
+      "source_url": "https://www.openstreetmap.org/relation/10622422",
+      "precision": "校園參考點，非穿堂精確位置",
+      "venue": "新北市三重區五華國小一心樓1樓穿堂"
+    },
+    "post-13351": {
+      "name": "新興郵局",
+      "lat": 22.631026,
+      "lon": 120.303875,
+      "county": "高雄市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/index.jsp?ID=1901",
+      "precision": "郵局參考點",
+      "venue": "新興郵局集郵服務中心"
+    },
+    "post-13356": {
+      "name": "祝山觀日平台",
+      "lat": 23.510273,
+      "lon": 120.823789,
+      "county": "嘉義縣",
+      "source_url": "https://chiayicamera.cyhg.gov.tw/scenes_content.aspx?sid=106",
+      "precision": "觀日平台周邊參考點，實際設於停機坪",
+      "venue": "阿里山國家森林遊樂區祝山觀日平台(停機坪)"
+    },
+    "post-13342": {
+      "name": "佳樂水風景區",
+      "lat": 21.9945,
+      "lon": 120.86396,
+      "county": "屏東縣",
+      "source_url": "https://www.dbnsa.gov.tw/zh-tw/attraction/AttractionPage?a=205",
+      "precision": "園區參考點，非貨櫃屋精確位置",
+      "venue": "佳樂水風景區(售票處旁停車場貨櫃屋)"
+    }
+  }
+}

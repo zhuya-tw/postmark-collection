@@ -29,7 +29,9 @@ jobs:
       - name: 安裝網站資料抓取套件
         run: pip install -r requirements.txt
       - name: 驗證解析器
-        run: python -m unittest discover -s tests -v
+        run: |
+          python -m unittest discover -s tests -v
+          node --test tests/activity-tools.test.cjs
       - name: 同步來源、自動重試與資料檢查
         run: python scripts/update_site.py
       - name: 儲存最新資料及圖片
@@ -46,10 +48,11 @@ jobs:
         shell: bash
         run: |
           mkdir -p site-dist
-          cp index.html catalog.html catalog.js visits.js .nojekyll site-dist/
+          cp index.html catalog.html catalog.js activity-tools.js activity-controls.js visits.js .nojekyll site-dist/
           cp -R data images site-dist/
           rm -f site-dist/data/health.json
           test -s site-dist/data/stamps.json
+          test -s site-dist/data/activity_locations.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

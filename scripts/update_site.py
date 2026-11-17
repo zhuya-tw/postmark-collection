@@ -7,6 +7,7 @@ import subprocess
 import sys
 import time
 from zoneinfo import ZoneInfo
+from activity_locations import is_current_location
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
@@ -82,6 +83,8 @@ def audit():
     def add(source, item, kind):
         issues.append(dict(source=source, id=item['id'], title=item['title'], kind=kind))
     office_data = read('offices')
+    location_file = DATA / 'activity_locations.json'
+    locations = json.loads(location_file.read_text(encoding='utf8')).get('locations', {}) if location_file.exists() else {}
     for source in ('stamps', 'commemorative', 'scenic'):
         for item in read(source)['items']:
             active = not item.get('unlisted') if source == 'scenic' else (
@@ -101,6 +104,8 @@ def audit():
                 if placement.get('status') != 'verified' or placement.get('refresh_failed'):
                     add(source, item, 'unverified-placement-list')
             if source == 'stamps':
+                if date.fromisoformat(item['date']) >= today and not is_current_location(item, locations.get(item['id'])):
+                    add(source, item, 'missing-activity-location')
                 if not item.get('recipient') or not item.get('address'):
                     add(source, item, 'missing-mailing-information')
                 if re.search(r'\d+號', item.get('recipient', '')):

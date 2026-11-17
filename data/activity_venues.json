@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-11-17",
+  "venues": [
+    {
+      "name": "臺北世界貿易中心展覽一館",
+      "match_all": [
+        "世界貿易中心展覽一館"
+      ],
+      "lat": 25.034177,
+      "lon": 121.561827,
+      "county": "臺北市",
+      "source_url": "https://www.post.gov.tw/post/internet/I_location/post.jsp?ID=1302&prsb_no=000209-4",
+      "precision": "一館內世貿郵局參考點，非臨局攤位精確位置"
+    },
+    {
+      "name": "五華國小",
+      "match_all": [
+        "新北市三重區",
+        "五華國小"
+      ],
+      "lat": 25.08752,
+      "lon": 121.4924152,
+      "county": "新北市",
+      "source_url": "https://www.openstreetmap.org/relation/10622422",
+      "precision": "校園參考點，非穿堂精確位置"
+    },
+    {
+      "name": "祝山觀日平台",
+      "match_all": [
+        "祝山觀日平台"
+      ],
+      "lat": 23.510273,
+      "lon": 120.823789,
+      "county": "嘉義縣",
+      "source_url": "https://chiayicamera.cyhg.gov.tw/scenes_content.aspx?sid=106",
+      "precision": "觀日平台周邊參考點，實際設於停機坪"
+    },
+    {
+      "name": "佳樂水風景區",
+      "match_all": [
+        "佳樂水風景區"
+      ],
+      "lat": 21.9945,
+      "lon": 120.86396,
+      "county": "屏東縣",
+      "source_url": "https://www.dbnsa.gov.tw/zh-tw/attraction/AttractionPage?a=205",
+      "precision": "園區參考點，非貨櫃屋精確位置"
+    },
+    {
+      "name": "大雪山遊客中心",
+      "match_all": [
+        "大雪山遊客中心",
+        "雪山路18號"
+      ],
+      "lat": 24.2552643,
+      "lon": 121.0082225,
+      "county": "臺中市",
+      "source_url": "https://www.openstreetmap.org/way/259739924",
+      "precision": "遊客中心參考點"
+    }
+  ]
+}
+
