@@ -8,3 +8,16 @@
 .postmark-basics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px}.postmark-basics h4{margin:6px 0;color:#336b5a}.postmark-basics p{margin:6px 0 14px}.optional-note{border:0;padding:0}.optional-note summary{font-size:18px}.optional-note[open] summary{margin-bottom:16px}@media(max-width:620px){.postmark-basics{grid-template-columns:1fr}}
 
 .guide-sidebar{min-width:0}.guide-sidebar>.panel:last-child{margin-bottom:0}
+
+.note-actions{align-items:center}.note-actions .sources{flex:1;min-width:160px;margin:0}.note-actions #copy-status:not(:empty){flex-basis:100%;font-size:13px}
+@media(min-width:761px){
+.guide-sidebar>.panel:has(.optional-note[open]){height:var(--note-room);max-height:var(--note-room);min-height:0;overflow:hidden}
+.optional-note[open]{display:flex;flex-direction:column;height:100%;min-height:0}
+.optional-note[open] summary{flex-shrink:0;margin-bottom:8px}
+.note-editor{display:flex;flex-direction:column;flex:1;min-height:0;overflow:auto}
+.note-editor>p{flex-shrink:0;margin:8px 0 12px}
+.note-editor textarea{flex:1;min-height:110px;height:110px;resize:none}
+.note-actions{flex-shrink:0;margin-top:12px}
+}
+
+.postmark-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.postmark-examples p{margin:0;background:#f3efe7;border-radius:12px;padding:14px 16px}.postmark-examples b{display:inline-block;margin-bottom:6px}@media(max-width:620px){.postmark-examples{grid-template-columns:1fr}}
