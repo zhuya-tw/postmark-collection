@@ -3,7 +3,7 @@ window.ActivityLocationUI={create(redisplay){
   const $=id=>document.getElementById(id),tools=window.ActivityTools;
   const state={locations:{},position:null,ready:false,request:0};
   const status=$('activity-location-status'),button=$('locate-activity'),clear=$('clear-activity-location');
-  function reset(){state.request++;state.position=null;clear.hidden=true;$('nearby-option').disabled=true;button.disabled=!state.ready;button.textContent='依我的位置找臨時郵局';if($('sort').value==='nearby')$('sort').value='asc';status.textContent=state.ready?'依活動地點計算直線距離；你的位置只在此頁使用，不會上傳。':'活動地點資料暫時無法載入，可先依日期或地區查詢。';}
+  function reset(){state.request++;state.position=null;clear.hidden=true;$('nearby-option').disabled=true;button.disabled=!state.ready;button.textContent='依我的位置找臨時郵局';if($('sort').value==='nearby')$('sort').value='asc';status.textContent=state.ready?'':'活動地點資料暫時無法載入，可先依日期或地區查詢。';}
   button.addEventListener('click',()=>{
     if(!navigator.geolocation){status.textContent='瀏覽器不支援定位，仍可依日期或地區排序。';return;}
     const request=++state.request;button.disabled=true;status.textContent='正在取得位置，請允許瀏覽器定位…';
@@ -29,11 +29,10 @@ window.ActivityLocationUI={create(redisplay){
     reset,
     afterDisplay(items){
       if(!state.position)return;
-      const missing=items.filter(item=>!tools.locationFor(item,state.locations)).length;
-      let message=$('sort').value==='nearby'?($('history').checked?'依過往活動地點的直線距離排序，非目前可前往的臨局。':'依活動地點直線距離排序，只列今天及未來場次。'):'已取得位置，可切換「距離近到遠」。';
-      if(missing)message+=' '+missing+' 場活動座標尚待確認，距離排序時列在最後。';
-      if(state.position.accuracy>1000)message+=' 目前定位精度約 '+(state.position.accuracy/1000).toFixed(1)+' 公里，距離僅供參考。';
-      status.textContent=message+' 山區距離不代表開車時間。';
+      const notes=[];
+      if($('sort').value==='nearby'&&$('history').checked)notes.push('目前顯示過往活動。');
+      if(state.position.accuracy>1000)notes.push('定位精度較低，距離僅供參考。');
+      status.textContent=notes.join(' ');
     },
     distanceLabel(item){if(!state.position)return '';const p=tools.locationFor(item,state.locations);return p?'活動地點距你約 '+tools.distance(state.position,p).toFixed(1)+' 公里（直線）':'活動座標尚待確認';}
   };
