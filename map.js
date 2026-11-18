@@ -47,3 +47,18 @@
 
 
 
+
+(() => {
+ const button=document.getElementById('back-to-search'),search=document.getElementById('place-search'),input=document.getElementById('place-query');
+ if(!button||!search||!input)return;
+ const update=()=>{button.hidden=search.getBoundingClientRect().bottom>=0;};
+ if('IntersectionObserver' in window){new IntersectionObserver(update).observe(search);}
+ window.addEventListener('scroll',update,{passive:true});
+ window.addEventListener('resize',update);
+ button.addEventListener('click',()=>{
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  search.scrollIntoView({behavior:reduce?'instant':'smooth',block:'start'});
+  input.focus({preventScroll:true});
+ });
+ update();
+})();

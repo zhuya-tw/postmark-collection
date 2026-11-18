@@ -21,3 +21,9 @@
 }
 
 .postmark-examples{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.postmark-examples p{margin:0;background:#f3efe7;border-radius:12px;padding:14px 16px}.postmark-examples b{display:inline-block;margin-bottom:6px}@media(max-width:620px){.postmark-examples{grid-template-columns:1fr}}
+
+#place-search{scroll-margin-top:16px}
+.back-to-search{position:fixed;right:24px;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:1100;border:1px solid #47606f;border-radius:24px;background:#233c4d;color:#fff;padding:12px 18px;min-height:44px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 5px 18px #233c4d30}
+.back-to-search:hover{background:#365366}.back-to-search:focus-visible{outline:3px solid #c49c5b;outline-offset:3px}
+@media(max-width:620px){.back-to-search{right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));padding:10px 14px}body:has(.back-to-search) main{padding-bottom:90px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
