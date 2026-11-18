@@ -38,7 +38,7 @@ button:disabled{opacity:.6;cursor:wait}
 .admin-entry{display:flex;justify-content:flex-end;margin-top:20px;font-size:13px}.admin-entry a{display:inline-block;padding:7px 12px;border:1px solid rgba(255,255,255,.4);border-radius:8px;color:white;text-decoration:none}.admin-entry a:hover{background:#36566a}.headwrap{padding-top:54px;padding-bottom:20px}@media(max-width:620px){.headwrap{padding-top:32px;padding-bottom:18px}.admin-entry{margin-top:18px}.admin-entry a{padding:7px 10px}}
 #cards{margin-top:16px}
 </style>
-<link rel="stylesheet" href="site-sections.css?v=20261118">
+<link rel="stylesheet" href="site-sections.css?v=20261118-quiet">
 <body>
 <header><div class="headwrap"><div class="postmark">集 郵</div><div class="eyebrow">POSTMARK COLLECTION · TAIWAN</div><h1>郵戳慢慢集</h1><p class="subtitle">查找臨時郵局戳、紀念戳與風景戳，收錄戳圖和中華郵政官方資料。</p><div class="headmeta"><span>資料來源：中華郵政</span><span>每天嘗試自動更新</span></div><div class="admin-entry"><a href="https://postmark-admin.joas0123.workers.dev/admin" target="_blank" rel="noopener noreferrer" title="以 GitHub 帳號登入郵戳管理區">管理者登入 ↗</a></div></div></header>
 <main><nav class="primary-nav" aria-label="網站功能"><a href="index.html">郵戳圖鑑</a><a href="map.html" aria-current="page">寄郵地圖</a><a href="guide.html">索戳指南</a></nav>
@@ -47,10 +47,10 @@ button:disabled{opacity:.6;cursor:wait}
 <div class="map-filters"><label for="place-query">名稱、地址或地標<input type="search" id="place-query" placeholder="例如：北門、臺中、車站" autocomplete="off"></label><label for="place-county">縣市<select id="place-county"><option value="">全部縣市</option></select></label></div>
 <div class="map-actions" id="place-types"><label class="pill"><input type="checkbox" value="offices" checked>郵局</label><label class="pill"><input type="checkbox" value="mailboxes" checked>郵筒</label><label class="pill"><input type="checkbox" value="lockers" checked>i郵箱</label></div>
 <div class="map-actions"><button class="action" id="find-nearby" type="button">依我的位置找附近據點</button><button class="action" id="clear-nearby" type="button" hidden>清除定位</button><button class="action" id="reset-places" type="button">清除篩選</button></div>
-<p class="map-status" id="nearby-status" role="status">允許定位後依直線距離排序。定位僅在此頁計算，不儲存你的定位紀錄。</p>
+<p class="map-status" id="nearby-status" role="status"></p>
 </section>
 <p class="map-status" id="places-status" role="status">正在整理附近的寄信提案…</p>
 <div class="map-layout"><section class="map-shell" aria-label="互動地圖"><div id="postal-map" class="map-canvas"><div><h3>讓寄信的路更清楚</h3><p>載入後會連線到 OpenStreetMap 底圖服務。</p><button class="action" id="load-map" type="button">載入互動地圖</button></div></div><p class="map-hint" id="map-hint">也可以直接使用右側據點清單。郵局為綠色、郵筒為橘色、i郵箱為藍色。</p></section>
 <section aria-label="據點清單"><div id="place-list" class="place-list"></div><button class="action" id="more-places" type="button" hidden>再看 30 個據點</button></section></div>
 <footer class="sources map-footer"><p>據點為中華郵政公開資料，實際服務、收信時間與臨時停用請以現場公告為準。距離是直線估算，導航路程可能不同。i郵箱未提供即時空櫃資訊；郵筒與 i郵箱不提供現場指定郵戳服務。</p><p>不是每間郵局都配置每款郵戳；請先到<a href="index.html">郵戳圖鑑</a>確認設置局所與索戳收件地址。</p><a href="https://data.gov.tw/dataset/5950" target="_blank" rel="noopener noreferrer">中華郵政開放資料</a><a href="https://data.gov.tw/dataset/7964" target="_blank" rel="noopener noreferrer">郵筒資料</a><a href="https://data.gov.tw/dataset/52779" target="_blank" rel="noopener noreferrer">i郵箱資料</a><span>資料授權：政府資料開放授權條款第 1 版</span></footer>
-</main><script src="map.js?v=20261118" defer></script><script src="visits.js?v=20261118" defer></script></body></html>
+</main><script src="map.js?v=20261118-quiet" defer></script><script src="visits.js?v=20261118" defer></script></body></html>
