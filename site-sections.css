@@ -6,3 +6,5 @@
 #nearby-status:empty{display:none}
 
 .postmark-basics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 24px}.postmark-basics h4{margin:6px 0;color:#336b5a}.postmark-basics p{margin:6px 0 14px}.optional-note{border:0;padding:0}.optional-note summary{font-size:18px}.optional-note[open] summary{margin-bottom:16px}@media(max-width:620px){.postmark-basics{grid-template-columns:1fr}}
+
+.guide-sidebar{min-width:0}.guide-sidebar>.panel:last-child{margin-bottom:0}
