@@ -48,9 +48,13 @@ jobs:
         shell: bash
         run: |
           mkdir -p site-dist
-          cp index.html catalog.html catalog.js activity-tools.js activity-controls.js visits.js .nojekyll site-dist/
-          cp -R data images site-dist/
+          cp index.html catalog.html catalog.js activity-tools.js activity-controls.js visits.js map.html map.js guide.html guide.js site-sections.css .nojekyll site-dist/
+          cp -R data images vendor site-dist/
           rm -f site-dist/data/health.json
+          test -s site-dist/data/map_offices.json
+          test -s site-dist/data/map_mailboxes.json
+          test -s site-dist/data/map_lockers.json
+          test -s site-dist/vendor/leaflet.js
           test -s site-dist/data/stamps.json
           test -s site-dist/data/activity_locations.json
       - uses: actions/configure-pages@v5

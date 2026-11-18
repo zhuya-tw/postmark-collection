@@ -8,6 +8,7 @@ import sys
 import time
 from zoneinfo import ZoneInfo
 from activity_locations import is_current_location
+from update_map import validate as validate_map
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
@@ -16,6 +17,7 @@ SOURCES = [
     ('commemorative', ['scripts/update_catalogs.py', 'commemorative']),
     ('scenic', ['scripts/update_catalogs.py', 'scenic']),
     ('offices', ['scripts/update_offices.py']),
+    *[('map_'+kind, ['scripts/update_map.py', kind]) for kind in ('offices','mailboxes','lockers')],
 ]
 
 
@@ -24,6 +26,9 @@ def read(name):
 
 
 def validate(name, value, previous=None):
+    if name.startswith('map_'):
+        validate_map(value, previous)
+        return
     if name == 'offices':
         if not value.get('offices') or not isinstance(value.get('commemorative'), dict):
             raise ValueError('局所資料不完整')

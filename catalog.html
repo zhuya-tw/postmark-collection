@@ -38,9 +38,11 @@ button:disabled{opacity:.6;cursor:wait}
 .admin-entry{display:flex;justify-content:flex-end;margin-top:20px;font-size:13px}.admin-entry a{display:inline-block;padding:7px 12px;border:1px solid rgba(255,255,255,.4);border-radius:8px;color:white;text-decoration:none}.admin-entry a:hover{background:#36566a}.headwrap{padding-top:54px;padding-bottom:20px}@media(max-width:620px){.headwrap{padding-top:32px;padding-bottom:18px}.admin-entry{margin-top:18px}.admin-entry a{padding:7px 10px}}
 #cards{margin-top:16px}
 </style>
+<link rel="stylesheet" href="site-sections.css?v=20261118">
 <body>
 <header><div class="headwrap"><div class="postmark">集 郵</div><div class="eyebrow">POSTMARK COLLECTION · TAIWAN</div><h1>郵戳慢慢集</h1><p class="subtitle">查找臨時郵局戳、紀念戳與風景戳，收錄戳圖和中華郵政官方資料。</p><div class="headmeta"><span>資料來源：中華郵政</span><span>每天嘗試自動更新</span></div><div class="admin-entry"><a href="https://postmark-admin.joas0123.workers.dev/admin" target="_blank" rel="noopener noreferrer" title="以 GitHub 帳號登入郵戳管理區">管理者登入 ↗</a></div></div></header>
 <main>
+<nav class="primary-nav" aria-label="網站功能"><a href="index.html" aria-current="page">郵戳圖鑑</a><a href="map.html">寄郵地圖</a><a href="guide.html">索戳指南</a></nav>
 <nav class="rowfilter category-nav" aria-label="郵戳分類"><a class="action" href="index.html">臨時郵局戳</a><a class="action" href="catalog.html?type=commemorative">紀念戳</a><a class="action" href="catalog.html?type=scenic">風景戳</a></nav>
 <h2 id="title" class="category-title">戳圖圖鑑</h2>
 <p id="intro"></p>
@@ -61,7 +63,7 @@ button:disabled{opacity:.6;cursor:wait}
 <div class="cards" id="cards"></div>
 </main>
 
-<script src="catalog.js?v=20261116-offices" defer></script>
+<script src="catalog.js?v=20261112-public-clean" defer></script>
 <script src="visits.js?v=20261112" defer></script>
 </body>
 </html>

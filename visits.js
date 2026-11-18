@@ -2,7 +2,7 @@
 (() => {
   if (navigator.doNotTrack === '1' || navigator.globalPrivacyControl === true) return;
   const randomId = () => Array.from(crypto.getRandomValues(new Uint8Array(16)), n => n.toString(16).padStart(2, '0')).join('');
-  const page = location.pathname.endsWith('catalog.html')
+  const page = location.pathname.endsWith('map.html') ? 'map' : location.pathname.endsWith('guide.html') ? 'guide' : location.pathname.endsWith('catalog.html')
     ? new URLSearchParams(location.search).get('type') === 'scenic' ? 'scenic' : 'commemorative'
     : 'temporary';
   let visitor;

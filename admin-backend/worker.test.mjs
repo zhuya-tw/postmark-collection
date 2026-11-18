@@ -101,6 +101,10 @@ test('view collection has no public read API, deduplicates retries, and hashes v
   const row = await env.DB.prepare('SELECT * FROM pageviews').first();
   assert.notEqual(row.visitor_hash, event.visitor);
   assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM pageviews').first()).n, 1);
+  for (const [page, letter] of [['map','c'],['guide','d']]) {
+    event.page = page; event.id = letter.repeat(32);
+    assert.equal((await send()).status, 204);
+  }
   assert.equal((await worker.fetch(request('/api/view'), env)).status, 404);
   assert.equal((await worker.fetch(request('/api/dashboard'), env)).status, 401);
   env.sqlite.close();

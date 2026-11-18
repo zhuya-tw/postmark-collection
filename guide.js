@@ -1,0 +1,1 @@
+document.getElementById('copy-note').addEventListener('click',async()=>{const note=document.getElementById('request-note'),status=document.getElementById('copy-status');try{await navigator.clipboard.writeText(note.value);status.textContent='已複製，可以貼到文件列印囉！';}catch{note.focus();note.select();status.textContent='請長按或按 Ctrl+C 複製選取的內容。';}});

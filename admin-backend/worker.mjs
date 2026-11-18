@@ -1,7 +1,7 @@
 const PUBLIC_SITE = 'https://zhuya-tw.github.io/postmark-collection/';
 const PUBLIC_ORIGIN = new URL(PUBLIC_SITE).origin;
 const OWNER_ID = 353211348;
-const PAGES = new Set(['temporary', 'commemorative', 'scenic']);
+const PAGES = new Set(['temporary', 'commemorative', 'scenic', 'map', 'guide']);
 const encoder = new TextEncoder();
 
 class HttpError extends Error {
@@ -191,7 +191,8 @@ for(const x of d.days){const row=node('tr','');row.append(node('td',x.day),node(
 if(!d.report){document.getElementById('checked').textContent='尚未收到自動更新報告。';return}
 const h=d.report.health;document.getElementById('checked').textContent='最近檢查 '+new Date(h.checked_at).toLocaleString('zh-TW',{timeZone:'Asia/Taipei'});
 document.getElementById('counts').textContent='臨時郵局 '+d.report.counts.stamps+' 筆 · 紀念戳 '+d.report.counts.commemorative+' 筆 · 風景戳 '+d.report.counts.scenic+' 筆';
-for(const [name,x] of Object.entries(h.sources)){document.getElementById('sources').append(node('p',name+'：'+(x.status==='ok'?'同步成功':'保留上次資料')+'，嘗試 '+x.attempts+' 次'))}
+const sourceNames={stamps:'臨時郵局戳',commemorative:'紀念戳',scenic:'風景戳',offices:'索戳局所地址',map_offices:'地圖：郵局',map_mailboxes:'地圖：郵筒',map_lockers:'地圖：i郵箱'};
+for(const [name,x] of Object.entries(h.sources)){document.getElementById('sources').append(node('p',(sourceNames[name]||name)+'：'+(x.status==='ok'?'同步成功':'保留上次資料')+'，嘗試 '+x.attempts+' 次'))}
 const kinds={'missing-image':'缺少戳圖','missing-mailing-information':'收件資訊待核對','recipient-contains-address':'收件人與地址待拆分','missing-office-address':'設置局所地址待核對','unverified-placement-list':'設置名單待核對','office-source-recheck':'地址來源需要重查','missing-activity-location':'活動座標尚待核對'};
 for(const x of h.issues){document.getElementById('issues').append(node('p',x.title+' · '+(kinds[x.kind]||'資料待核對')))}
 if(!h.issues.length)document.getElementById('issues').textContent='本次資料檢查通過。';
