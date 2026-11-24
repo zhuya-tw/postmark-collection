@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-11-24T13:19:58+08:00",
-  "update_status": "排程同步成功：本次取得 22 場，累計收錄 27 場（含歷史紀錄）",
+  "updated_at": "2026-11-24T17:20:14+08:00",
+  "update_status": "排程同步成功：本次取得 23 場，累計收錄 27 場（含歷史紀錄）",
   "source_url": "https://www.post.gov.tw/post/internet/Philately/index.jsp?ID=507",
   "items": [
     {
@@ -243,14 +243,14 @@
     {
       "id": "post-13357",
       "date": "2026-12-01",
-      "region": "桃園",
+      "region": "臺南",
       "title": "新年郵票(115年版)發行首日",
       "recipient": "桃園郵局集郵服務中心",
       "address": "330005 桃園市桃園區成功路一段51號",
       "address_status": "已核對官方收件單位及地址",
       "image_url": "images/cache/cd9011949fe11425147b.jpg",
-      "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13357&ID=507",
-      "venue_note": "楊梅郵局(地址:楊梅區大平街7號)(郵件請寄:330005桃園市桃園區成功路一段51號桃園郵局集郵服務中心)(主辦局:桃園郵局)(局贈封:無)(9時至12時)",
+      "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13362&ID=507",
+      "venue_note": "臺南市北區成功路6號2樓（集郵中心）（郵件請寄集郵中心）（主辦局：臺南郵局）（局贈封：無）（9時至12時）",
       "source_description": "中華郵政臨時郵局戳圖公告",
       "address_source_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13357&ID=507",
       "address_checked_at": "2026-11-12",
@@ -280,10 +280,7 @@
       "image_url": "images/cache/3599e32008d828b32034.jpg",
       "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13358&ID=507",
       "venue_note": "永隆里活動中心（臺中市大里區永隆六街29號）（郵件請寄臺中民權路郵局）(主辦局:民權路郵局)(局贈封:新年郵票(115年版)首日封)(9時30分至12時30分)",
-      "source_description": "中華郵政臨時郵局戳圖公告",
-      "address_source_url": "https://www.post.gov.tw/post/internet/Templates/getOpenDataFile.jsp?vkey=B484EB27-B3F0-4D02-8F62-047D20C64078",
-      "address_checked_at": "2026-11-24",
-      "address_note": "公告明列收件局所，地址與中華郵政營業據點資料核對。"
+      "source_description": "中華郵政臨時郵局戳圖公告"
     },
     {
       "id": "post-13361",

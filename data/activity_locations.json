@@ -127,15 +127,6 @@
       "precision": "一館內世貿郵局參考點，非臨局攤位精確位置",
       "venue": "台北世界貿易中心展覽一館(本場臨局不受理報值郵件)"
     },
-    "post-13357": {
-      "name": "楊梅郵局",
-      "lat": 24.910675,
-      "lon": 121.147608,
-      "county": "桃園市",
-      "source_url": "https://www.post.gov.tw/post/internet/I_location/index.jsp?ID=1901",
-      "precision": "郵局參考點",
-      "venue": "楊梅郵局(地址:楊梅區大平街7號)"
-    },
     "2026-12-05-18": {
       "name": "五華國小",
       "lat": 25.08752,
