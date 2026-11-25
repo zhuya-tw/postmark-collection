@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  actions: read
   pages: write
   id-token: write
 concurrency:
@@ -19,10 +20,10 @@ jobs:
     timeout-minutes: 40
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deploy_first.outputs.page_url || steps.deploy_retry.outputs.page_url || steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: pip
@@ -33,6 +34,7 @@ jobs:
           python -m unittest discover -s tests -v
           node --test tests/activity-tools.test.cjs
       - name: 同步來源、自動重試與資料檢查
+        id: sync
         run: python scripts/update_site.py
       - name: 儲存最新資料及圖片
         shell: bash
@@ -57,14 +59,37 @@ jobs:
           test -s site-dist/vendor/leaflet.js
           test -s site-dist/data/stamps.json
           test -s site-dist/data/activity_locations.json
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        id: upload
         with:
           path: './site-dist'
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      # Artifact upload can finish before the artifact-list service sees it.
+      # Keep one upload and retry deployment only; retries never refetch postal data.
+      - name: 等待已上傳的網站檔案就緒
+        run: sleep 10
+      - name: 發布網站（第一次）
+        id: deploy_first
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+      - name: 等待後重試發布
+        if: steps.deploy_first.outcome == 'failure'
+        run: sleep 15
+      - name: 發布網站（第二次）
+        id: deploy_retry
+        if: steps.deploy_first.outcome == 'failure'
+        continue-on-error: true
+        uses: actions/deploy-pages@v5
+      - name: 最後一次發布前等待
+        if: steps.deploy_retry.outcome == 'failure'
+        run: sleep 45
+      - name: 發布網站（最後一次）
+        id: deployment
+        if: steps.deploy_retry.outcome == 'failure'
+        uses: actions/deploy-pages@v5
 
       - name: 傳送私人管理報告
+        if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
         env:
           POSTMARK_REPORT_TOKEN: ${{ secrets.POSTMARK_REPORT_TOKEN }}
         run: python scripts/upload_report.py
