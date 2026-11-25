@@ -37,6 +37,40 @@
     "placement_source_url": "https://www.post.gov.tw/post/FileCenter/post_ww2/stampmark/picture/place0911.pdf",
     "checked_at": "2026-11-16",
     "service_note": "嘉義文化路郵局故宮南院延伸櫃臺。郵寄索戳請先向郵局確認收件方式。"
+  },
+  "新興郵局集郵服務中心": {
+    "name": "新興郵局集郵服務中心",
+    "address": "800012 高雄市新興區中正三路179號1樓",
+    "source_url": "https://www.post.gov.tw/post/internet/Philately/index.jsp?ID=510",
+    "verification_terms": [
+      "新興郵局",
+      "800012",
+      "高雄市新興區中正三路179號1樓"
+    ],
+    "checked_at": "2026-11-25",
+    "phone": ""
+  },
+  "臺南集郵中心": {
+    "name": "臺南集郵中心",
+    "address": "704401 臺南市北區成功路6號2樓",
+    "source_url": "https://www.post.gov.tw/post/internet/Q_localpost/index.jsp?ID=12040801",
+    "verification_terms": [
+      "臺南成功路郵局集郵服務中心",
+      "704401",
+      "臺南市北區成功路6號2樓"
+    ],
+    "checked_at": "2026-11-25",
+    "phone": ""
+  },
+  "臺中郵局營業管理科": {
+    "name": "臺中郵局營業管理科",
+    "address": "400700 臺中市中區民權路86號7樓",
+    "source_url": "https://www.post.gov.tw/post/internet/Q_localpost/index.jsp?ID=12030101&control_type=page&news_cat=1203&news_no=75426&news_type=most_share",
+    "verification_terms": [
+      "臺中郵局營業管理科",
+      "400700臺中市中區民權路86號7樓"
+    ],
+    "checked_at": "2026-11-25",
+    "phone": ""
   }
 }
-

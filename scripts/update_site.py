@@ -69,9 +69,9 @@ def reconcile_addresses():
         if office and not item.get('address'):
             item['address'] = office['address']
             item['address_status'] = '已核對官方收件單位及地址'
-            item['address_source_url'] = office_data['source_url']
-            item['address_checked_at'] = datetime.now(ZoneInfo('Asia/Taipei')).date().isoformat()
-            item['address_note'] = '公告明列收件局所，地址與中華郵政營業據點資料核對。'
+            item['address_source_url'] = office.get('source_url') or office_data['source_url']
+            item['address_checked_at'] = office.get('checked_at') or datetime.now(ZoneInfo('Asia/Taipei')).date().isoformat()
+            item['address_note'] = '公告明列收件單位，地址已與中華郵政官方資料核對。'
     atomic_write('stamps', stamps)
 
 
@@ -109,6 +109,9 @@ def audit():
                 if placement.get('status') != 'verified' or placement.get('refresh_failed'):
                     add(source, item, 'unverified-placement-list')
             if source == 'stamps':
+                recipient_office = office_data['offices'].get(normalize(item.get('recipient', '')), {})
+                if recipient_office.get('refresh_failed'):
+                    add(source, item, 'office-source-recheck')
                 if date.fromisoformat(item['date']) >= today and not is_current_location(item, locations.get(item['id'])):
                     add(source, item, 'missing-activity-location')
                 if not item.get('recipient') or not item.get('address'):

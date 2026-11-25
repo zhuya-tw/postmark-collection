@@ -41,6 +41,16 @@ def parse_names(text):
     return [name for _, name in entries]
 
 
+def required_office_names(scenic, placements, stamps):
+    # Keep explicitly named mailing recipients as well as stamp placement offices.
+    # Event venues and organizers never identify a mailing recipient.
+    needed = {normalize(item['office']) for item in scenic}
+    for placement in placements:
+        needed.update(normalize(office['name']) for office in placement['offices'])
+    needed.update(normalize(item['recipient']) for item in stamps if item.get('recipient'))
+    return needed
+
+
 def update():
     response = requests.get(SOURCE, timeout=20)
     response.raise_for_status()
@@ -92,9 +102,9 @@ def update():
     with ThreadPoolExecutor(max_workers=5) as pool:
         placements_by_id = dict(pool.map(placements, items))
     scenic = json.loads((ROOT / 'data' / 'scenic.json').read_text(encoding='utf-8'))['items']
-    needed = {normalize(item['office']) for item in scenic}
+    stamps = json.loads((ROOT / 'data' / 'stamps.json').read_text(encoding='utf-8'))['items']
+    needed = required_office_names(scenic, placements_by_id.values(), stamps)
     for placement in placements_by_id.values():
-        needed.update(normalize(office['name']) for office in placement['offices'])
         placement['office_names'] = [office['name'] for office in placement.pop('offices')]
     write_activity_locations(offices)
     offices = {name: value for name, value in offices.items() if name in needed}
