@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-25T16:13:36+08:00",
+  "updated_at": "2026-11-25T17:24:33+08:00",
   "update_status": "排程同步成功：本次取得 22 場，累計收錄 27 場（含歷史紀錄）",
   "source_url": "https://www.post.gov.tw/post/internet/Philately/index.jsp?ID=507",
   "items": [
@@ -293,10 +293,7 @@
       "image_url": "images/cache/796175ef5e2e1216d96e.jpg",
       "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13361&ID=507",
       "venue_note": "順天國民小學（臺中市大甲區經國路168沆）（郵件請寄臺中郵局營業管理科）(主辦局:大甲廟口郵局)(局贈封:自印封(小封))(10時30分至14時)",
-      "source_description": "中華郵政臨時郵局戳圖公告",
-      "address_source_url": "https://www.post.gov.tw/post/internet/Q_localpost/index.jsp?ID=12030101&control_type=page&news_cat=1203&news_no=75426&news_type=most_share",
-      "address_checked_at": "2026-11-25",
-      "address_note": "公告明列收件單位，地址已與中華郵政官方資料核對。"
+      "source_description": "中華郵政臨時郵局戳圖公告"
     },
     {
       "id": "post-13360",
@@ -309,10 +306,7 @@
       "image_url": "images/cache/298528e95945017f9944.jpg",
       "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13360&ID=507",
       "venue_note": "臺南市東區前鋒路210號（百老匯廣場）（郵件請寄台南集郵中心）（主辦局：臺南郵局）（局贈封：無）（15時至20時）",
-      "source_description": "中華郵政臨時郵局戳圖公告",
-      "address_source_url": "https://www.post.gov.tw/post/internet/Q_localpost/index.jsp?ID=12040801",
-      "address_checked_at": "2026-11-25",
-      "address_note": "公告明列收件單位，地址已與中華郵政官方資料核對。"
+      "source_description": "中華郵政臨時郵局戳圖公告"
     },
     {
       "id": "post-13359",
@@ -325,10 +319,7 @@
       "image_url": "images/cache/57d60bebb2931c3f4f86.jpg",
       "official_url": "https://www.post.gov.tw/post/internet/Philately/sz_stampmark_dtl.jsp?temp_sn=13359&ID=507",
       "venue_note": "高雄大遠百1樓廣場（高雄市苓雅區三多四路21號）（郵件請寄新興郵局集郵服務中心）(主辦局:高雄郵局)(局贈封:無)(10時30分至16時)",
-      "source_description": "中華郵政臨時郵局戳圖公告",
-      "address_source_url": "https://www.post.gov.tw/post/internet/Philately/index.jsp?ID=510",
-      "address_checked_at": "2026-11-25",
-      "address_note": "公告明列收件單位，地址已與中華郵政官方資料核對。"
+      "source_description": "中華郵政臨時郵局戳圖公告"
     },
     {
       "id": "post-13351",
